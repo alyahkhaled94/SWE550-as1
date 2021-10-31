@@ -1,13 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Show databases in MySQL server</title>
+<title> members</title>
 <meta http-equiv="content-type" content="text/html; charset=iso-8859-1" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
-<h1>Show databases in MySQL server</h1>
+	
+<h1> members names</h1>
+	
+
+        <form action="" method="post">
+            ID:
+            <input type=int name="i1">
+            <br>
+            <br>
+            <input type=submit name="s">
+            <?php
+if(isset($_POST['s']))
+{
+    $a=$_POST['i1']; //accessing value from the text field
+    echo "The name of the member is:-".$a; //displaying result
+}
+            ?>
+        </form>
+  
+	
 <?php
 
 getenv('MYSQL_DBHOST') ? $db_host=getenv('MYSQL_DBHOST') : $db_host="localhost";
