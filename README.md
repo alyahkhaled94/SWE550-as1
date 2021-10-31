@@ -1,5 +1,5 @@
 # Assigment1
-using php Language and html using notpad frame work connected with Mysql database and docker container.
+webpage using php Language and html and notpad frame work, connected with Mysql database and docker container.
 
 
 My Sql Data query:
