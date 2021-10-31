@@ -10,21 +10,6 @@
 	
 <h1> members names</h1>
 	
-
-        <form action="" method="post">
-            ID:
-            <input type=int name="i1">
-            <br>
-            <br>
-            <input type=submit name="s">
-            <?php
-if(isset($_POST['s']))
-{
-    $a=$_POST['i1']; //accessing value from the text field
-    echo "The name of the member is:-".$a; //displaying result
-}
-            ?>
-        </form>
   
 	
 <?php
@@ -32,8 +17,8 @@ if(isset($_POST['s']))
 getenv('MYSQL_DBHOST') ? $db_host=getenv('MYSQL_DBHOST') : $db_host="localhost";
 getenv('MYSQL_DBPORT') ? $db_port=getenv('MYSQL_DBPORT') : $db_port="3306";
 getenv('MYSQL_DBUSER') ? $db_user=getenv('MYSQL_DBUSER') : $db_user="root";
-getenv('MYSQL_DBPASS') ? $db_pass=getenv('MYSQL_DBPASS') : $db_pass="";
-getenv('MYSQL_DBNAME') ? $db_name=getenv('MYSQL_DBNAME') : $db_name="";
+getenv('MYSQL_DBPASS') ? $db_pass=getenv('MYSQL_DBPASS') : $db_pass="secret";
+getenv('MYSQL_DBNAME') ? $db_name=getenv('MYSQL_DBNAME') : $db_name="LocalServer";
 
 if (strlen( $db_name ) === 0)
   $conn = new mysqli("$db_host:$db_port", $db_user, $db_pass);
@@ -43,17 +28,27 @@ else
 // Check connection
 if ($conn->connect_error) 
 	die("Connection failed: " . $conn->connect_error);
- 
-if (!($result=mysqli_query($conn,'SHOW DATABASES')))
-    printf("Error: %s\n", mysqli_error($conn));
 
-echo "<h3>Databases</h3>";
 
-while($row = mysqli_fetch_row( $result ))
-    echo $row[0]."<br />";
+echo "<h3>members</h3>";
 
-$result -> free_result();
-$conn->close();
+$sql = 'SELECT names FROM members ORDER BY ID';
+   $retval = mysql_query( $sql, $conn );
+	if(! $retval ) {
+      die('Could not get data: ' . mysql_error());
+   }
+
+	
+while($row = mysql_fetch_array($retval, MYSQL_ASSOC)) {
+      echo "EMP ID :{$row['names']}  <br> ".
+         "EMP NAME : {$row['ID']} <br> ".
+       } <br> ".
+         "--------------------------------<br>";
+   }
+   
+   echo "Fetched data successfully\n";
+   mysql_close($conn);
+
 ?>
 </div>
 </body>
